@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap">
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif; 
+        background: url("https://images.rawpixel.com/image_social_landscape/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcm0yMThiYXRjaDctYXVtLTI3XzFfMi5qcGc.jpg"); /* Updated background gradient */
+        background-size: cover;
+        background-size: cover; /* Make the background cover the entire screen */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; 
+    }
+    div {
+    padding: 10px;
+}
+
+    #app {
+    max-width: 400px;
+    padding: 39px;
+    border-radius: 9px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0%);
+    background: rgb(111 111 111 / 70%);
+}
+#todo-list {
+        margin-top: 20px;
+        list-style-type: none;
+        padding: 0;
+    }
+    #todo-list li {
+        margin-bottom: 5px;
+        color: white;
+    }
+    #todo-list li input[type="checkbox"] {
+        margin-right: 10px;
+    }
+    .completed {
+        text-decoration: line-through;
+        color: #999;
+    }
+    button {
+        background-color: #c7ffe7;
+        color: rgb(0, 0, 0);
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    input[type="text"] {
+        width: calc(100% - 75px); /* Adjusted input width to accommodate the button */
+        padding: 10px;
+        border-radius: 5px;
+    }
+</style>
+</head>
+<body>
+
+<div id="app">
+    <div>
+        <img src="https://static.vecteezy.com/system/resources/previews/021/629/730/original/3d-illustration-of-to-do-list-png.png" alt="Todo List Image" style="width: 50px; height: 50px; float: left; margin-right: 10px;">
+        <h2 style="margin: 0; color: white;">My To-Do</h2> <!-- Added title -->
+    </div>
+    <div style="clear: both;"></div> <!-- Clear float -->
+    <input type="text" id="taskInput" placeholder="Enter task">
+    <button id="addBtn">Add</button>
+    <ul id="todo-list"></ul>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const taskInput = document.getElementById("taskInput");
+    const addBtn = document.getElementById("addBtn");
+    const todoList = document.getElementById("todo-list");
+
+    addBtn.addEventListener("click", function() {
+        const taskText = taskInput.value.trim();
+        if (taskText !== "") {
+            const listItem = document.createElement("li");
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            const taskSpan = document.createElement("span");
+            taskSpan.textContent = taskText;
+            listItem.appendChild(checkbox);
+            listItem.appendChild(taskSpan);
+            todoList.appendChild(listItem);
+            taskInput.value = ""; // Clear input field after adding task
+
+            // Event listener for marking task as completed
+            checkbox.addEventListener("change", function() {
+                if (checkbox.checked) {
+                    taskSpan.classList.add("completed");
+                } else {
+                    taskSpan.classList.remove("completed");
+                }
+            });
+        }
+    });
+});
+</script>
+</body>
+</html>
